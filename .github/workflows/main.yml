@@ -9,8 +9,8 @@ jobs:
         shell: bash
         run: |
           BRANCH_NAME="${GITHUB_REF#refs/heads/}"
-          echo $BRANCH_NAME
+          echo "$BRANCH_NAME" >> $GITHUB_ENV
 
-      # - uses: anthonyneto/forge-action@dev
-      #   with:
-      #     GITHUB_BRANCH: ${{ env.GITHUB_BRANCH }}
+      - uses: anthonyneto/forge-action@dev
+        with:
+          GITHUB_BRANCH: ${{ env.GITHUB_BRANCH }}
