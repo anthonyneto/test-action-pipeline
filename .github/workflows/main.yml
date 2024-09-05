@@ -6,10 +6,11 @@ jobs:
     name: forge-action
     steps:
       - name: Get Branch Name
+        shell: bash
         run: |
-          BRANCH_NAME=${GITHUB_REF#refs/heads/}
-          echo $BRANCH_NAME >> $GITHUB_ENV
+          BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+          echo $BRANCH_NAME
 
-      - uses: anthonyneto/forge-action@dev
-        with:
-          GITHUB_BRANCH: ${{ env.GITHUB_BRANCH }}
+      # - uses: anthonyneto/forge-action@dev
+      #   with:
+      #     GITHUB_BRANCH: ${{ env.GITHUB_BRANCH }}
