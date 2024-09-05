@@ -5,6 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     name: forge-action
     steps:
+      - name: Get Branch Name
+        run: |
+          BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          echo $BRANCH_NAME >> $GITHUB_ENV
+
       - uses: anthonyneto/forge-action@dev
         with:
-          GITHUB_BRANCH: 'dev'
+          GITHUB_BRANCH: ${{ env.GITHUB_BRANCH }}
