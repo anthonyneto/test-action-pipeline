@@ -5,12 +5,17 @@ jobs:
     runs-on: ubuntu-latest
     name: forge-action
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Get Branch Name
+        id: get-branch-name
         shell: bash
         run: |
           BRANCH_NAME="${GITHUB_REF#refs/heads/}"
-          echo "$BRANCH_NAME" >> $GITHUB_ENV
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
-      - uses: anthonyneto/forge-action@dev
+      - name: Use Forge Action
+        uses: anthonyneto/forge-action@dev
         with:
-          GITHUB_BRANCH: ${{ env.GITHUB_BRANCH }}
+          GITHUB_BRANCH: ${{ env.BRANCH_NAME }}
