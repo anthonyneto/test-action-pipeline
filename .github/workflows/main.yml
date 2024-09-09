@@ -11,6 +11,9 @@ on:
           - development
           - staging
           - production
+env:
+  FORGE_SERVER_ID: ${{ env.FORGE_SERVER_ID }}
+
 jobs:
   main:
     runs-on: ubuntu-latest
