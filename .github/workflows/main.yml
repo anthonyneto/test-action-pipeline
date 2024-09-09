@@ -1,22 +1,10 @@
 on:
   push:
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Select environment context'
-        required: true
-        type: choice
-        options:
-          - default
-          - development
-          - staging
-          - production
 
 jobs:
   main:
     runs-on: ubuntu-latest
     name: forge-action
-    environment: ${{ github.event.inputs.environment || 'default' }}
     steps:
       - name: Get Branch Name
         run: |
