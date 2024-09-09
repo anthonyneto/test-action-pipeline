@@ -14,7 +14,7 @@ jobs:
 
       - name: Debug
         run: |
-          echo FORGE_SERVER_ID: {{ env.FORGE_SERVER_ID }}
+          echo FORGE_SERVER_ID: ${{ env.FORGE_SERVER_ID }}
 
       - name: Use Forge Action
         uses: anthonyneto/forge-action@dev
