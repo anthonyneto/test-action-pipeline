@@ -1,17 +1,26 @@
-on: [push]
-
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select environment context'
+        required: true
+        type: choice
+        options:
+          - default
+          - development
+          - staging
+          - production
 jobs:
   main:
     runs-on: ubuntu-latest
     name: forge-action
-    environment: default
+    environment: ${{ github.event.inputs.environment || 'default' }}
     steps:
       - name: Get Branch Name
         run: |
           GITHUB_BRANCH_NAME="${GITHUB_REF#refs/heads/}"
           echo "GITHUB_BRANCH_NAME=$GITHUB_BRANCH_NAME" >> $GITHUB_ENV
-          # Example of setting another variable
-          echo "FORGE_SERVER_ID=my-server-id" >> $GITHUB_ENV
 
       - name: Debug Environment Variables
         run: |
