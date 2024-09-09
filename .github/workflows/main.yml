@@ -10,10 +10,14 @@ jobs:
         run: |
           GITHUB_BRANCH_NAME="${GITHUB_REF#refs/heads/}"
           echo "GITHUB_BRANCH_NAME=$GITHUB_BRANCH_NAME" >> $GITHUB_ENV
+          # Example of setting another variable
+          echo "FORGE_SERVER_ID=my-server-id" >> $GITHUB_ENV
 
-      - name: Debug
+      - name: Debug Environment Variables
         run: |
-          echo FORGE_SERVER_ID: ${{ env.FORGE_SERVER_ID }}
+          echo "GITHUB_BRANCH_NAME=${{ env.GITHUB_BRANCH_NAME }}"
+          echo "FORGE_SERVER_ID=${{ env.FORGE_SERVER_ID }}"
+          echo "FORGE_ZONE=${{ env.FORGE_SERVER_ID }}"
 
       - name: Use Forge Action
         uses: anthonyneto/forge-action@dev
@@ -23,7 +27,3 @@ jobs:
           FORGE_SERVER_ID: ${{ env.FORGE_SERVER_ID }}
           FORGE_ZONE: ${{ env.FORGE_ZONE }}
           FORGE_GIT_URL: ${{ env.FORGE_GIT_URL }}
-          # RDS_ROOT_USERNAME:
-          # RDS_ROOT_PASSWORD:
-          # RDS_NAME:
-          # RDS_PR_DB_NAME:
