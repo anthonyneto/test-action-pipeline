@@ -12,6 +12,10 @@ jobs:
           GITHUB_BRANCH_NAME="${GITHUB_REF#refs/heads/}"
           echo "GITHUB_BRANCH_NAME=$GITHUB_BRANCH_NAME" >> $GITHUB_ENV
 
+      - name: Debug
+        run: |
+          echo FORGE_SERVER_ID: {{ env.FORGE_SERVER_ID }}
+
       - name: Use Forge Action
         uses: anthonyneto/forge-action@dev
         with:
