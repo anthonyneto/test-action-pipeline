@@ -4,8 +4,7 @@ jobs:
   main:
     runs-on: ubuntu-latest
     name: forge-action
-    environment:
-      name: default
+    environment: default
     steps:
       - name: Get Branch Name
         run: |
