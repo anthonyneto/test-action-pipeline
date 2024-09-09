@@ -25,7 +25,7 @@ jobs:
 
       - name: Debug Environment Variables
         run: |
-          echo "GITHUB_BRANCH_NAME=${{ vars.GITHUB_BRANCH_NAME }}"
+          echo "GITHUB_BRANCH_NAME=${{ env.GITHUB_BRANCH_NAME }}"
           echo "FORGE_SERVER_ID=${{ vars.FORGE_SERVER_ID }}"
           echo "FORGE_ZONE=${{ vars.FORGE_ZONE }}"
           echo "FORGE_GIT_URL=${{ vars.FORGE_GIT_URL }}"
