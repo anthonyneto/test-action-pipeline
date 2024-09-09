@@ -1,11 +1,6 @@
 on:
   push:
 
-env:
-  - FORGE_SERVER_ID=${{ vars.FORGE_SERVER_ID }}
-  - FORGE_ZONE=${{ vars.FORGE_ZONE }}
-  - FORGE_GIT_URL=${{ vars.FORGE_GIT_URL }}
-
 jobs:
   main:
     runs-on: ubuntu-latest
