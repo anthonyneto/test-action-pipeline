@@ -8,8 +8,8 @@ jobs:
   send-message:
     runs-on: ubuntu-latest
     environment:
-      name: ${{ steps.debug.outputs.environment_name }}
-      url: ${{ steps.debug.outputs.environment_url }}
+      name: ${{ steps.Debug.outputs.ENVIRONMENT_NAME }}
+      url: ${{ steps.Debug.outputs.ENVIRONMENT_URL }}
     permissions:
       pull-requests: write
     steps:
