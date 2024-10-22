@@ -8,6 +8,10 @@ jobs:
   send-message:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        run: |
+          env
+
       - name: Send message to pull request
         # env:
         #   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
