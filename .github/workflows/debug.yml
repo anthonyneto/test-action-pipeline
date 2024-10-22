@@ -25,6 +25,6 @@ jobs:
       - name: Debug
         id: debug
         run: |
-          echo $ENVIRONMENT_NAME
-          echo $ENVIRONMENT_URL
+          echo ${{ needs.set-variables.outputs.ENVIRONMENT_NAME }}
+          echo ${{ needs.set-variables.outputs.ENVIRONMENT_URL }}
 
