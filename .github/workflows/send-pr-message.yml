@@ -8,22 +8,27 @@ jobs:
   send-message:
     runs-on: ubuntu-latest
     environment:
-      # name: ${{ steps.debug.outputs.ENVIRONMENT_NAME }}
+      # name: ${{ steps.dynamic_variables.outputs.ENVIRONMENT_NAME }}
       name: stage
-      url: ${{ env.ENVIRONMENT_URL }}
+      url: ${{ steps.dynamic_variables.outputs.ENVIRONMENT_URL }}
     permissions:
       pull-requests: write
     steps:
-      - name: Debug
-        id: debug
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Dynamic Variables
+        id: dynamic_variables
         run: |
           cat << EOF >> "$GITHUB_ENV"
           ENVIRONMENT_NAME=$(date +%s)
           ENVIRONMENT_URL=$(date +%s).nintendo.com
           EOF
-          env | sort
+
+      - name: Debug
+        id: debug
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo $ENVIRONMENT_NAME
+          echo $ENVIRONMENT_URL
 
       # - name: Send message to pull request
       #   env:
