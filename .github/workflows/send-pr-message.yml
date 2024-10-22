@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send message to pull request
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           PR_NUMBER=${{ github.event.pull_request.number }}
           MESSAGE="Thank you for your contribution! We will review it soon."
