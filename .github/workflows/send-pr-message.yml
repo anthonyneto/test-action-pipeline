@@ -10,7 +10,7 @@ jobs:
     environment:
       # name: ${{ steps.debug.outputs.ENVIRONMENT_NAME }}
       name: stage
-      url: ${{ steps.debug.outputs.ENVIRONMENT_URL }}
+      url: ${{ env.ENVIRONMENT_URL }}
     permissions:
       pull-requests: write
     steps:
