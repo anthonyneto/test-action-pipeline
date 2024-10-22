@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
+    environment:
+      url: blah.com
     steps:
       - name: Debug
         env:
