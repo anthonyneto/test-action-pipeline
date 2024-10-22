@@ -8,7 +8,7 @@ jobs:
   send-message:
     runs-on: ubuntu-latest
     environment:
-      # name: ${{ steps.debug.outputs.ENVIRONMENT_NAME }}
+      name: ${{ steps.debug.outputs.ENVIRONMENT_NAME }}
       name: production
       url: ${{ steps.debug.outputs.ENVIRONMENT_URL }}
     permissions:
