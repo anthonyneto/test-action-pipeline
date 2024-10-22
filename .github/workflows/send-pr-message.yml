@@ -8,13 +8,14 @@ jobs:
   send-message:
     runs-on: ubuntu-latest
     environment:
-      # name: ${{ steps.Debug.outputs.ENVIRONMENT_NAME }}
+      # name: ${{ steps.debug.outputs.ENVIRONMENT_NAME }}
       name: production
-      url: ${{ steps.Debug.outputs.ENVIRONMENT_URL }}
+      url: ${{ steps.debug.outputs.ENVIRONMENT_URL }}
     permissions:
       pull-requests: write
     steps:
       - name: Debug
+        id: debug
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
