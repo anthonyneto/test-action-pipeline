@@ -14,12 +14,14 @@ jobs:
       - name: Dynamic Variables
         id: dynamic_variables
         run: |
-          ENV_NAME=$(date +%s)
+          GITHUB_BRANCH_NAME="${GITHUB_HEAD_REF#refs/heads/}"
+          ENV_NAME="${GITHUB_BRANCH_NAME}"
           ENV_URL="${ENV_NAME}.nintendo.com"
           echo "ENVIRONMENT_NAME=${ENV_NAME}" >> $GITHUB_ENV
           echo "ENVIRONMENT_URL=${ENV_URL}" >> $GITHUB_ENV
           echo "ENVIRONMENT_NAME=${ENV_NAME}" >> $GITHUB_OUTPUT
           echo "ENVIRONMENT_URL=${ENV_URL}" >> $GITHUB_OUTPUT
+          echo "GITHUB_BRANCH_NAME=${GITHUB_BRANCH_NAME}" >> $GITHUB_ENV
 
   post-url:
     runs-on: ubuntu-latest
