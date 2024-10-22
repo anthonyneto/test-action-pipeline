@@ -4,13 +4,14 @@ on:
   pull_request:
     types: [opened, edited, synchronize]
 
+environment:
+  url: blah.com
+
 jobs:
   send-message:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
-    environment:
-      url: blah.com
     steps:
       - name: Debug
         env:
