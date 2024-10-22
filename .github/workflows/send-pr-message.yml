@@ -8,8 +8,8 @@ jobs:
   send-message:
     runs-on: ubuntu-latest
     environment:
-      name: production
-      url: https://github.com
+      name: ${{ steps.debug.outputs.environment_name }}
+      url: ${{ steps.debug.outputs.environment_url }}
     permissions:
       pull-requests: write
     steps:
@@ -17,16 +17,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          cat << EOF >> "$GITHUB_ENV"
+          ENVIRONMENT_NAME=$(date +%s)
+          ENVIRONMENT_URL=$(date +%s).nintendo.com
+          EOF
           env | sort
 
-      - name: Send message to pull request
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          PR_NUMBER=${{ github.event.pull_request.number }}
-          MESSAGE="Thank you for your contribution! We will review it soon."
-          curl -X POST \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            -d "{\"body\":\"$MESSAGE\"}" \
-            "https://api.github.com/repos/${{ github.repository }}/issues/$PR_NUMBER/comments"
+      # - name: Send message to pull request
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     PR_NUMBER=${{ github.event.pull_request.number }}
+      #     MESSAGE="Thank you for your contribution! We will review it soon."
+      #     curl -X POST \
+      #       -H "Authorization: token $GITHUB_TOKEN" \
+      #       -H "Accept: application/vnd.github.v3+json" \
+      #       -d "{\"body\":\"$MESSAGE\"}" \
+      #       "https://api.github.com/repos/${{ github.repository }}/issues/$PR_NUMBER/comments"
