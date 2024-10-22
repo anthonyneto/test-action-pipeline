@@ -16,7 +16,7 @@ jobs:
         run: |
           GITHUB_BRANCH_NAME="${GITHUB_HEAD_REF#refs/heads/}"
           ENV_NAME="${GITHUB_BRANCH_NAME//\//-}"
-          ENV_URL="${ENV_NAME}.nintendo.com"
+          ENV_URL="https://${ENV_NAME}.127.0.0.1.nip.io"
           echo "ENVIRONMENT_NAME=${ENV_NAME}" >> $GITHUB_ENV
           echo "ENVIRONMENT_URL=${ENV_URL}" >> $GITHUB_ENV
           echo "ENVIRONMENT_NAME=${ENV_NAME}" >> $GITHUB_OUTPUT
