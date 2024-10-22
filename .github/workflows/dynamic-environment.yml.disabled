@@ -1,0 +1,36 @@
+name: debug
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  set-variables:
+    runs-on: ubuntu-latest
+    outputs:
+      environment_name: ${{ steps.dynamic_variables.outputs.ENVIRONMENT_NAME }}
+      environment_url: ${{ steps.dynamic_variables.outputs.ENVIRONMENT_URL }}
+    steps:
+      - name: Dynamic Variables
+        id: dynamic_variables
+        run: |
+          GITHUB_BRANCH_NAME="${GITHUB_HEAD_REF#refs/heads/}"
+          ENV_NAME="${GITHUB_BRANCH_NAME//\//-}"
+          ENV_URL="https://${ENV_NAME}.127.0.0.1.nip.io"
+          echo "ENVIRONMENT_NAME=${ENV_NAME}" >> $GITHUB_ENV
+          echo "ENVIRONMENT_URL=${ENV_URL}" >> $GITHUB_ENV
+          echo "ENVIRONMENT_NAME=${ENV_NAME}" >> $GITHUB_OUTPUT
+          echo "ENVIRONMENT_URL=${ENV_URL}" >> $GITHUB_OUTPUT
+          echo "GITHUB_BRANCH_NAME=${GITHUB_BRANCH_NAME}" >> $GITHUB_ENV
+
+  post-url:
+    runs-on: ubuntu-latest
+    needs: set-variables
+    environment:
+      name: ${{ needs.set-variables.outputs.environment_name }}
+      url: ${{ needs.set-variables.outputs.environment_url }}
+    steps:
+      - name: Debug
+        run: |
+          echo "Environment Name: ${{ needs.set-variables.outputs.environment_name }}"
+          echo "Environment URL: ${{ needs.set-variables.outputs.environment_url }}"
