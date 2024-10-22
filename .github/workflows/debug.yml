@@ -1,0 +1,30 @@
+name: debug
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  set-variables:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dynamic Variables
+        id: dynamic_variables
+        run: |
+          cat << EOF >> "$GITHUB_ENV"
+          ENVIRONMENT_NAME=$(date +%s)
+          ENVIRONMENT_URL=$(date +%s).nintendo.com
+          EOF
+
+  post-url:
+    runs-on: ubuntu-latest
+    environment:
+      name: stage
+      url: ${{ needs.set-variables.outputs.ENVIRONMENT_URL }}
+    steps:
+      - name: Debug
+        id: debug
+        run: |
+          echo $ENVIRONMENT_NAME
+          echo $ENVIRONMENT_URL
+
