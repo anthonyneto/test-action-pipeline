@@ -4,12 +4,12 @@ on:
   pull_request:
     types: [opened, edited, synchronize]
 
-environment:
-  url: blah.com
-
 jobs:
   send-message:
     runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://github.com
     permissions:
       pull-requests: write
     steps:
