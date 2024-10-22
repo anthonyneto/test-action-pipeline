@@ -7,24 +7,28 @@ on:
 jobs:
   set-variables:
     runs-on: ubuntu-latest
+    outputs:
+      environment_name: ${{ steps.dynamic_variables.outputs.ENVIRONMENT_NAME }}
+      environment_url: ${{ steps.dynamic_variables.outputs.ENVIRONMENT_URL }}
     steps:
       - name: Dynamic Variables
         id: dynamic_variables
         run: |
-          cat << EOF >> "$GITHUB_ENV"
-          ENVIRONMENT_NAME=$(date +%s)
-          ENVIRONMENT_URL=$(date +%s).nintendo.com
-          EOF
+          ENV_NAME=$(date +%s)
+          ENV_URL="${ENV_NAME}.nintendo.com"
+          echo "ENVIRONMENT_NAME=${ENV_NAME}" >> $GITHUB_ENV
+          echo "ENVIRONMENT_URL=${ENV_URL}" >> $GITHUB_ENV
+          echo "::set-output name=ENVIRONMENT_NAME::${ENV_NAME}"
+          echo "::set-output name=ENVIRONMENT_URL::${ENV_URL}"
 
   post-url:
     runs-on: ubuntu-latest
+    needs: set-variables
     environment:
       name: stage
-      url: ${{ needs.set-variables.outputs.ENVIRONMENT_URL }}
+      url: ${{ needs.set-variables.outputs.environment_url }}
     steps:
       - name: Debug
-        id: debug
         run: |
-          echo ${{ needs.set-variables.outputs.ENVIRONMENT_NAME }}
-          echo ${{ needs.set-variables.outputs.ENVIRONMENT_URL }}
-
+          echo "Environment Name: ${{ needs.set-variables.outputs.environment_name }}"
+          echo "Environment URL: ${{ needs.set-variables.outputs.environment_url }}"
