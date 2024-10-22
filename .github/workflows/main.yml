@@ -1,21 +1,21 @@
-on:
-  push:
+# on:
+#   push:
 
-jobs:
-  main:
-    runs-on: ubuntu-latest
-    name: forge-action
-    steps:
-      - name: Get Branch Name
-        run: |
-          GITHUB_BRANCH_NAME="${GITHUB_REF#refs/heads/}"
-          echo "GITHUB_BRANCH_NAME=$GITHUB_BRANCH_NAME" >> $GITHUB_ENV
+# jobs:
+#   main:
+#     runs-on: ubuntu-latest
+#     name: forge-action
+#     steps:
+#       - name: Get Branch Name
+#         run: |
+#           GITHUB_BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+#           echo "GITHUB_BRANCH_NAME=$GITHUB_BRANCH_NAME" >> $GITHUB_ENV
 
-      - name: Use Forge Action
-        uses: anthonyneto/forge-action@dev
-        with:
-          GITHUB_BRANCH_NAME: ${{ env.GITHUB_BRANCH_NAME }}
-          FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
-          FORGE_SERVER_ID: ${{ vars.FORGE_SERVER_ID }}
-          FORGE_ZONE: ${{ vars.FORGE_ZONE }}
-          FORGE_GIT_URL: ${{ vars.FORGE_GIT_URL }}
+#       - name: Use Forge Action
+#         uses: anthonyneto/forge-action@dev
+#         with:
+#           GITHUB_BRANCH_NAME: ${{ env.GITHUB_BRANCH_NAME }}
+#           FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+#           FORGE_SERVER_ID: ${{ vars.FORGE_SERVER_ID }}
+#           FORGE_ZONE: ${{ vars.FORGE_ZONE }}
+#           FORGE_GIT_URL: ${{ vars.FORGE_GIT_URL }}
