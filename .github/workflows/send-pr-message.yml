@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Debug
         run: |
-          env
+          env | sort
 
       - name: Send message to pull request
         # env:
